@@ -123,9 +123,7 @@ The deployed Lambda source should be exported from the AWS Lambda console and ad
 - `process_order.py`
 - `get_order_status.py`
 - `update_order_status.py`
-- `recovery_lambda.py` (only if implemented and tested)
 
-Before committing, remove credentials, private customer data, account-specific secrets, and any hard-coded sensitive configuration. Review the function source and logs for personal information.
 
 ## Security and cost notes
 
