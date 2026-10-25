@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickBite | Food Delivered with Love</title>
+
+<style>
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --light-blue: #eff6ff;
+  --text: #172033;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --green: #15803d;
+  --orange: #c2410c;
+  --red: #dc2626;
+  --white: #ffffff;
+  --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -1px;
+}
+
+.logo span { color: #f97316; }
+
+nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+nav button {
+  border: 0;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #475569;
+  font-weight: 700;
+}
+
+nav button.active, nav button:hover {
+  color: var(--blue);
+  background: var(--light-blue);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 26px 22px 55px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 25px;
+  align-items: center;
+  background: #eaf2ff;
+  border-radius: 22px;
+  padding: 35px;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 4vw, 51px);
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+  margin: 12px 0;
+}
+
+.hero h1 span { color: var(--blue); }
+
+.hero p {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 470px;
+}
+
+.hero img {
+  width: 100%;
+  height: 265px;
+  object-fit: cover;
+  border-radius: 17px;
+}
+
+.eyebrow {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.primary, .secondary, .danger, .success-btn {
+  border: 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: .15s;
+}
+
+.primary { background: var(--blue); color: white; }
+.primary:hover { background: var(--blue-dark); }
+.secondary { background: var(--light-blue); color: var(--blue); }
+.danger { background: #fee2e2; color: var(--red); }
+.success-btn { background: #dcfce7; color: var(--green); }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 34px 0 18px;
+}
+
+.section-head h2 { margin: 0 0 5px; font-size: 26px; }
+.section-head p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.category {
+  background: white;
+  color: #475569;
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-weight: 700;
+}
+
+.category.active, .category:hover {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.food-card, .card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.food-card img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.food-content { padding: 17px; }
+.food-content h3 { margin: 0 0 8px; }
+.food-content p { font-size: 13px; color: var(--muted); line-height: 1.5; min-height: 39px; }
+.food-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.price { color: var(--blue); font-size: 20px; font-weight: 800; }
+
+.badge {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.card { padding: 22px; margin-bottom: 20px; }
+.card h2, .card h3 { margin-top: 0; }
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+
+label { font-size: 13px; font-weight: 700; color: #475569; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  outline: none;
+  background: white;
+  color: var(--text);
+}
+
+input:focus, select:focus, textarea:focus { border-color: var(--blue); }
+textarea { resize: vertical; min-height: 85px; }
+
+.payment-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.payment-option {
+  display: block;
+  border: 1px solid var(--border);
+  padding: 14px 9px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.payment-option:has(input:checked) {
+  border-color: var(--blue);
+  background: var(--light-blue);
+}
+
+.payment-option input { width: auto; margin: 0 4px 0 0; }
+
+.cart-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-line:last-child { border-bottom: 0; }
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.qty button {
+  border: 1px solid var(--border);
+  background: white;
+  width: 27px;
+  height: 27px;
+  border-radius: 7px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: #475569;
+}
+
+.total-line.grand {
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  padding-top: 15px;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.notice {
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--light-blue);
+  color: #1e40af;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.success-notice {
+  padding: 20px;
+  border-radius: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  margin-bottom: 20px;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.status-pill.green { background: #dcfce7; color: #166534; }
+.status-pill.orange { background: #ffedd5; color: #9a3412; }
+.status-pill.red { background: #fee2e2; color: #991b1b; }
+.status-pill.blue { background: #dbeafe; color: #1d4ed8; }
+
+.tracking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.progress-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+  margin: 30px 0;
+}
+
+.progress-step { text-align: center; position: relative; }
+.progress-icon {
+  width: 42px;
+  height: 42px;
+  margin: auto auto 10px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-step.done .progress-icon { background: #dcfce7; }
+.progress-step.current .progress-icon { background: var(--blue); color: white; }
+.progress-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.progress-step.done .progress-label, .progress-step.current .progress-label { color: var(--text); font-weight: 800; }
+
+.track-search {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0;
+}
+.track-search input { flex: 1; min-width: 0; }
+
+.order-card { margin-bottom: 15px; }
+.order-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.order-meta { color: var(--muted); font-size: 13px; line-height: 1.8; }
+
+.rating-stars { display: flex; gap: 8px; margin: 15px 0; }
+.star {
+  font-size: 31px;
+  border: 0;
+  background: transparent;
+  color: #cbd5e1;
+  padding: 0;
+}
+.star.selected { color: #f59e0b; }
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 18px;
+}
+.stat strong { display: block; font-size: 27px; margin-top: 8px; }
+.stat span { color: var(--muted); font-size: 13px; }
+
+.admin-order {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+}
+.admin-order-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.admin-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.admin-controls select { width: auto; min-width: 180px; }
+
+.empty {
+  padding: 35px 15px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty div { font-size: 38px; margin-bottom: 10px; }
+
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #172033;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 11px;
+  box-shadow: var(--shadow);
+  z-index: 100;
+  display: none;
+  max-width: 350px;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  background: white;
+  text-align: center;
+  padding: 25px 15px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer strong { color: var(--blue); }
+
+@media (max-width: 850px) {
+  .hero { grid-template-columns: 1fr; padding: 25px; }
+  .hero img { height: 230px; }
+  .food-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two-column { grid-template-columns: 1fr; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .nav { padding: 13px; }
+  nav { width: 100%; }
+  nav button { padding: 9px 8px; font-size: 12px; }
+  .container { padding: 18px 13px 40px; }
+  .hero { padding: 20px; }
+  .food-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .payment-options { grid-template-columns: 1fr; }
+  .progress-track { gap: 2px; }
+  .progress-icon { width: 31px; height: 31px; font-size: 14px; }
+  .progress-label { font-size: 9px; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); }
+  .track-search { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Quick<span>Bite</span> 🍴</div>
+    <nav aria-label="Main navigation">
+      <button class="active" data-panel="menu">🍔 Menu</button>
+      <button data-panel="checkout">🛒 Cart <span id="cartCount">0</span></button>
+      <button data-panel="track">📦 Track Order</button>
+      <button data-panel="orders">📋 My Orders</button>
+      <button data-panel="admin">⚙️ Admin</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- MENU -->
+  <section class="panel active" id="menu">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Fresh food · Happy moments</span>
+        <h1>Your cravings,<br>delivered <span>with love.</span></h1>
+        <p>Discover your favourites, place an order, and follow every step until it reaches your doorstep.</p>
+        <button class="primary" onclick="document.getElementById('foodMenu').scrollIntoView({behavior:'smooth'})">Explore Menu ↓</button>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=85"
+        alt="Freshly prepared pizza"
+        onerror="this.style.display='none'">
+    </div>
+
+    <div class="section-head" id="foodMenu">
+      <div>
+        <h2>Explore our menu</h2>
+        <p>Freshly prepared favourites for every mood.</p>
+      </div>
+      <span class="badge">⭐ Customer favourites</span>
+    </div>
+
+    <div class="categories" id="categories"></div>
+    <div class="food-grid" id="foodGrid"></div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section class="panel" id="checkout">
+    <div class="section-head">
+      <div>
+        <h2>Your cart & checkout</h2>
+        <p>Review your items and delivery details.</p>
+      </div>
+    </div>
+
+    <div class="two-column">
+      <div class="card">
+        <h3>👤 Delivery information</h3>
+        <form id="checkoutForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="customerName">Full name *</label>
+              <input id="customerName" required maxlength="80" placeholder="Enter your name">
+            </div>
+            <div class="field">
+              <label for="customerPhone">Mobile number *</label>
+              <input id="customerPhone" required type="tel" pattern="[0-9+() \-]{7,18}" placeholder="Enter mobile number">
+            </div>
+            <div class="field full">
+              <label for="customerEmail">Email address *</label>
+              <input id="customerEmail" required type="email" maxlength="254" autocomplete="email" placeholder="you@example.com">
+              <small style="color:var(--muted)">We'll use this address for order updates.</small>
+            </div>
+            <div class="field full">
+              <label for="customerAddress">Delivery address *</label>
+              <textarea id="customerAddress" required maxlength="300" placeholder="House number, street, area, city"></textarea>
+            </div>
+            <div class="field full">
+              <label for="deliveryInstructions">Delivery instructions (optional)</label>
+              <input id="deliveryInstructions" maxlength="200" placeholder="Landmark, gate instructions, etc.">
+            </div>
+          </div>
+
+          <h3 style="margin-top:26px">💳 Select payment method</h3>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Cash on Delivery" checked>
+              💵 Cash on Delivery
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="UPI (Demo)">
+              📱 UPI (Demo)
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Card (Demo)">
+              💳 Card (Demo)
+            </label>
+          </div>
+
+          <p class="notice" style="margin-top:15px">
+            Demo notice: UPI and card selections do not charge money. A real payment gateway is not connected.
+          </p>
+
+          <button class="primary" type="submit" style="width:100%;margin-top:15px">
+            Place Order · <span id="checkoutButtonTotal">₹0</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>🛒 Order summary</h3>
+        <div id="cartItems"></div>
+        <div id="cartTotals"></div>
+        <button class="secondary" style="width:100%;margin-top:12px" onclick="showPanel('menu')">＋ Add more food</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER TRACKING -->
+  <section class="panel" id="track">
+    <div class="section-head">
+      <div>
+        <h2>Track your order 📦</h2>
+        <p>Follow your order from confirmation to delivery.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <label for="trackOrderId">Enter your order ID</label>
+      <div class="track-search">
+        <input id="trackOrderId" placeholder="Example: QB-123456">
+        <button class="primary" onclick="trackOrder()">Track Order</button>
+      </div>
+      <div id="trackingResult">
+        <div class="empty">
+          <div>🛵</div>
+          <strong>Your food journey starts here.</strong>
+          <p>Place an order, then enter its order ID to track it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER HISTORY -->
+  <section class="panel" id="orders">
+    <div class="section-head">
+      <div>
+        <h2>My orders 📋</h2>
+        <p>Your recent orders, delivery progress and ratings.</p>
+      </div>
+      <button class="secondary" onclick="renderOrders()">↻ Refresh</button>
+    </div>
+    <div id="orderHistory"></div>
+  </section>
+
+  <!-- ADMIN -->
+  <section class="panel" id="admin">
+    <div class="section-head">
+      <div>
+        <h2>Restaurant dashboard ⚙️</h2>
+        <p>Demo controls for order processing and failure recovery.</p>
+      </div>
+      <button class="secondary" onclick="renderAdmin()">↻ Refresh</button>
+    </div>
+
+    <div class="notice" style="margin-bottom:20px">
+      This is a demonstration dashboard without authentication. Status changes are stored in this browser only until the AWS backend is connected.
+    </div>
+
+    <div class="admin-stats" id="adminStats"></div>
+
+    <div class="card">
+      <h3>Manage orders</h3>
+      <div id="adminOrders"></div>
+    </div>
+
+    <div class="card">
+      <h3>⭐ Customer feedback</h3>
+      <div id="adminRatings"></div>
+    </div>
+  </section>
+
+  <!-- ORDER SUCCESS MODAL -->
+  <section class="panel" id="confirmation">
+    <div class="card">
+      <div class="success-notice">
+        <div style="font-size:36px">🎉</div>
+        <h2 style="margin-bottom:8px">Your order has been placed!</h2>
+        <p id="confirmationMessage">Thank you for choosing QuickBite.</p>
+      </div>
+      <div id="confirmationDetails"></div>
+      <button class="primary" onclick="showPanel('track')">📦 Track My Order</button>
+      <button class="secondary" onclick="showPanel('menu')">Continue Shopping</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>QuickBite</strong> · Good food, happy moments.<br>
+  <span style="display:inline-block;margin-top:8px">AWS Event-Driven Order Processing Project · Demonstration Version</span>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/*
+ * QUICKBITE FRONTEND DEMO
+ * Current storage: browser localStorage.
+ * Future integration: API Gateway + AWS Lambda + SQS + DynamoDB.
+ */
+
+const STORAGE_KEY = "quickbite_demo_orders_v1";
+const CART_KEY = "quickbite_demo_cart_v1";
+
+const FOOD = [
+  {
+    id: "f1",
+    name: "Classic Cheese Pizza",
+    category: "Pizza",
+    price: 249,
+    rating: "4.8",
+    description: "Golden crust, mozzarella and fresh tomato sauce.",
+    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f2",
+    name: "Veggie Supreme Pizza",
+    category: "Pizza",
+    price: 299,
+    rating: "4.7",
+    description: "A colourful mix of vegetables and melted cheese.",
+    image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f3",
+    name: "Classic Chicken Burger",
+    category: "Burgers",
+    price: 179,
+    rating: "4.8",
+    description: "Juicy chicken, crisp lettuce and our house sauce.",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f4",
+    name: "Crispy Veg Burger",
+    category: "Burgers",
+    price: 139,
+    rating: "4.5",
+    description: "Crispy veggie patty in a soft toasted bun.",
+    image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f5",
+    name: "Chicken Biryani",
+    category: "Biryani",
+    price: 229,
+    rating: "4.9",
+    description: "Fragrant rice, aromatic spices and tender chicken.",
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f6",
+    name: "Veg Dum Biryani",
+    category: "Biryani",
+    price: 169,
+    rating: "4.6",
+    description: "Slow-cooked fragrant rice with fresh vegetables.",
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f7",
+    name: "French Fries",
+    category: "Sides",
+    price: 99,
+    rating: "4.5",
+    description: "Crispy golden fries with a pinch of seasoning.",
+    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f8",
+    name: "Chocolate Milkshake",
+    category: "Drinks",
+    price: 119,
+    rating: "4.7",
+    description: "A chilled, creamy chocolate treat.",
+    image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=650&q=80"
+  },
+  {
+    id: "f9",
+    name: "Fresh Lemon Cooler",
+    category: "Drinks",
+    price: 69,
+    rating: "4.4",
+    description: "Refreshing lemon drink served chilled.",
+    image: "https://images.unsplash.com/photo-1563940486743-66780870ff34?auto=format&fit=crop&w=650&q=80"
+
+  }
+];
+
+const STEPS = [
+  { status: "PLACED", label: "Order Placed", icon: "📝" },
+  { status: "CONFIRMED", label: "Confirmed", icon: "✓" },
+  { status: "PREPARING", label: "Preparing", icon: "🍳" },
+  { status: "READY", label: "Ready for Pickup", icon: "📦" },
+  { status: "OUT_FOR_DELIVERY", label: "Out for Delivery", icon: "🛵" },
+  { status: "DELIVERED", label: "Delivered", icon: "🎉" }
+];
+
+const STATUS_LABELS = {
+  PLACED: "Order Placed",
+  CONFIRMED: "Order Confirmed",
+  PREPARING: "Preparing",
+  READY: "Ready for Pickup",
+  OUT_FOR_DELIVERY: "Out for Delivery",
+  DELIVERED: "Delivered",
+  FAILED: "Processing Failed",
+  CANCELLED: "Cancelled"
+};
+
+let selectedCategory = "All";
+let selectedRating = 0;
+let currentTrackingId = null;
+let toastTimer = null;
+
+function money(amount) {
+  return "₹" + Number(amount || 0).toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, function(char) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char];
+  });
+}
+
+function readJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (error) {
+    console.error("Storage read failed:", error);
+    return fallback;
+  }
+}
+
+function getOrders() {
+  const data = readJSON(STORAGE_KEY, []);
+  return Array.isArray(data) ? data : [];
+}
+
+function saveOrders(orders) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+}
+
+function getCart() {
+  const cart = readJSON(CART_KEY, {});
+  return cart && typeof cart === "object" && !Array.isArray(cart) ? cart : {};
+}
+
+function saveCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+function getCartCount() {
+  return Object.values(getCart()).reduce((sum, qty) => sum + Number(qty || 0), 0);
+}
+
+function getCartSubtotal() {
+  const cart = getCart();
+  return Object.entries(cart).reduce((sum, [id, qty]) => {
+    const food = FOOD.find(item => item.id === id);
+    return sum + (food ? food.price * Number(qty) : 0);
+  }, 0);
+}
+
+function getDeliveryFee() {
+  return getCartSubtotal() > 0 ? 30 : 0;
+}
+
+function getGrandTotal() {
+  return getCartSubtotal() + getDeliveryFee();
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.style.display = "none", 3000);
+}
+
+function showPanel(panelId) {
+  document.querySelectorAll(".panel").forEach(panel => {
+    panel.classList.toggle("active", panel.id === panelId);
+  });
+
+  document.querySelectorAll("nav button[data-panel]").forEach(button => {
+    button.classList.toggle("active", button.dataset.panel === panelId);
+  });
+
+  if (panelId === "checkout") renderCart();
+  if (panelId === "orders") renderOrders();
+  if (panelId === "admin") renderAdmin();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("nav button[data-panel]").forEach(button => {
+  button.addEventListener("click", () => showPanel(button.dataset.panel));
+});
+
+function renderCategories() {
+  const categories = ["All", ...new Set(FOOD.map(item => item.category))];
+
+  document.getElementById("categories").innerHTML = categories.map(category => `
+    <button class="category ${selectedCategory === category ? "active" : ""}"
+      onclick="chooseCategory('${escapeHTML(category)}')">
+      ${escapeHTML(category)}
+    </button>
+  `).join("");
+}
+
+function chooseCategory(category) {
+  selectedCategory = category;
+  renderCategories();
+  renderFood();
+}
+
+function renderFood() {
+  const items = selectedCategory === "All"
+    ? FOOD
+    : FOOD.filter(item => item.category === selectedCategory);
+
+  document.getElementById("foodGrid").innerHTML = items.map(item => `
+    <article class="food-card">
+      <img
+        src="${escapeHTML(item.image)}"
+        alt="${escapeHTML(item.name)}"
+        loading="eager"
+        onerror="console.error('Image failed to load:', this.src)">
+      <div class="food-content">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+          <h3>${escapeHTML(item.name)}</h3>
+          <span class="badge">⭐ ${escapeHTML(item.rating)}</span>
+        </div>
+        <span class="badge">${escapeHTML(item.category)}</span>
+        <p>${escapeHTML(item.description)}</p>
+        <div class="food-bottom">
+          <span class="price">${money(item.price)}</span>
+          <button class="primary" onclick="addToCart('${item.id}')">＋ Add</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function addToCart(foodId) {
+  const cart = getCart();
+  cart[foodId] = Math.min(99, Number(cart[foodId] || 0) + 1);
+  saveCart(cart);
+  updateCartCount();
+  showToast("Added to cart!");
+}
+
+function changeQuantity(foodId, amount) {
+  const cart = getCart();
+  cart[foodId] = Number(cart[foodId] || 0) + amount;
+
+  if (cart[foodId] <= 0) delete cart[foodId];
+  saveCart(cart);
+  updateCartCount();
+  renderCart();
+}
+
+function removeFromCart(foodId) {
+  const cart = getCart();
+  delete cart[foodId];
+  saveCart(cart);
+  updateCartCount();
+  renderCart();
+}
+
+
+function updateCartCount() {
+  const cartCountElement = document.getElementById("cartCount");
+  const checkoutTotalElement = document.getElementById("checkoutButtonTotal");
+
+  if (cartCountElement) {
+    cartCountElement.textContent = getCartCount();
+  }
+
+  if (checkoutTotalElement) {
+    checkoutTotalElement.textContent = money(getGrandTotal());
+  }
+}
+
+
+
+function renderCart() {
+  const cart = getCart();
+  const entries = Object.entries(cart).filter(([id, qty]) =>
+    FOOD.some(item => item.id === id) && Number(qty) > 0
+  );
+
+  const itemsEl = document.getElementById("cartItems");
+  const totalsEl = document.getElementById("cartTotals");
+
+  if (!entries.length) {
+    itemsEl.innerHTML = `
+      <div class="empty">
+        <div>🛒</div>
+        <strong>Your cart is empty</strong>
+        <p>Choose something delicious from our menu.</p>
+      </div>`;
+    totalsEl.innerHTML = "";
+    updateCartCount();
+    return;
+  }
+
+  itemsEl.innerHTML = entries.map(([id, qty]) => {
+    const item = FOOD.find(food => food.id === id);
+    return `
+      <div class="cart-line">
+        <div>
+          <strong>${escapeHTML(item.name)}</strong>
+          <div class="order-meta">${money(item.price)} each</div>
+          <div class="qty">
+            <button type="button" onclick="changeQuantity('${id}',-1)" aria-label="Decrease quantity">−</button>
+            <span>${qty}</span>
+            <button type="button" onclick="changeQuantity('${id}',1)" aria-label="Increase quantity">+</button>
+            <button type="button" onclick="removeFromCart('${id}')" title="Remove item">🗑️</button>
+          </div>
+        </div>
+        <strong>${money(item.price * qty)}</strong>
+      </div>`;
+  }).join("");
+
+  totalsEl.innerHTML = `
+    <div class="total-line"><span>Subtotal</span><strong>${money(getCartSubtotal())}</strong></div>
+    <div class="total-line"><span>Delivery fee</span><strong>${money(getDeliveryFee())}</strong></div>
+    <div class="total-line grand"><span>Total</span><span>${money(getGrandTotal())}</span></div>`;
+
+  updateCartCount();
+}
+
+function makeOrderId() {
+  return "QB-" + Date.now().toString().slice(-8) + Math.floor(Math.random() * 10);
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return Number.isNaN(date.getTime()) ? "Date unavailable" : date.toLocaleString();
+}
+
+function getStatusClass(status) {
+  if (status === "DELIVERED" || status === "CONFIRMED") return "green";
+  if (status === "PREPARING" || status === "READY" || status === "OUT_FOR_DELIVERY") return "orange";
+  if (status === "FAILED" || status === "CANCELLED") return "red";
+  return "blue";
+}
+
+async function createOrder(event) {
+  event.preventDefault();
+
+  const cart = getCart();
+  const entries = Object.entries(cart).filter(([id, qty]) =>
+    FOOD.some(item => item.id === id) && Number(qty) > 0
+  );
+
+  if (!entries.length) {
+    showToast("Your cart is empty. Add food before checkout.");
+    showPanel("menu");
+    return;
+  }
+
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const email = document.getElementById("customerEmail").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+  const instructions = document.getElementById("deliveryInstructions").value.trim();
+
+  if (!name || !phone || !email || !address) {
+    showToast("Please complete your delivery information.");
+    return;
+  }
+
+  const submitButton = document.querySelector(
+    '#checkoutForm button[type="submit"]'
+  );
+
+  const payment = document.querySelector(
+    'input[name="payment"]:checked'
+  ).value;
+
+  const items = entries.map(([id, qty]) => {
+    const food = FOOD.find(item => item.id === id);
+
+    return {
+      id: food.id,
+      name: food.name,
+      price: food.price,
+      quantity: Number(qty),
+      lineTotal: food.price * Number(qty)
+    };
+  });
+
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+
+  const deliveryFee = 30;
+  const total = subtotal + deliveryFee;
+
+  const payload = {
+    customerName: name,
+    customerEmail: email,
+    customerPhone: phone,
+    customerAddress: address,
+    deliveryInstructions: instructions,
+    items: items.map(item => ({
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity
+    })),
+    paymentMethod: payment,
+    total: total
+  };
+
+  try {
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending order to AWS...";
+
+    const response = await fetch(
+      "https://t3jo82h2kh.execute-api.us-west-2.amazonaws.com/prod/orders",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || `Request failed: ${response.status}`);
+    }
+
+    if (!result.orderId) {
+      throw new Error("AWS did not return an order ID.");
+    }
+
+    const now = new Date().toISOString();
+
+    const order = {
+      orderId: result.orderId,
+      customer: { name, email, phone, address, instructions },
+      items,
+      subtotal,
+      deliveryFee,
+      total: result.total,
+      paymentMethod: payment,
+      paymentStatus: payment === "Cash on Delivery"
+        ? "Pay on delivery"
+        : "Demo — not charged",
+      status: result.status || "RECEIVED",
+      attempts: 0,
+      createdAt: now,
+      updatedAt: now,
+      rating: null,
+      feedback: "",
+      statusHistory: [
+        { status: result.status || "RECEIVED", at: now }
+      ]
+    };
+
+    // Keep a local copy for the existing UI.
+    // AWS remains the source of truth for the order.
+    const orders = getOrders();
+    orders.unshift(order);
+    saveOrders(orders);
+    saveCart({});
+
+    document.getElementById("checkoutForm").reset();
+    document.querySelector(
+      'input[name="payment"][value="Cash on Delivery"]'
+    ).checked = true;
+
+    currentTrackingId = order.orderId;
+
+    document.getElementById("confirmationMessage").textContent =
+      `Thank you, ${name}! Your order was submitted to AWS successfully.`;
+
+    document.getElementById("confirmationDetails").innerHTML = `
+      <div class="card" style="box-shadow:none">
+        <div class="order-meta">AWS ORDER ID</div>
+        <h2 style="color:var(--blue)">${escapeHTML(order.orderId)}</h2>
+        <p><strong>Total:</strong> ${money(order.total)}</p>
+        <p><strong>Payment:</strong> ${escapeHTML(payment)}</p>
+        <p><strong>Status:</strong>
+          <span class="status-pill blue">
+            ${escapeHTML(order.status)}
+          </span>
+        </p>
+        <button class="secondary"
+          onclick="copyOrderId('${escapeHTML(order.orderId)}')">
+          Copy Order ID
+        </button>
+      </div>`;
+
+    updateCartCount();
+    showPanel("confirmation");
+    renderOrders();
+
+  } catch (error) {
+    console.error("AWS order submission failed:", error);
+    showToast("Order was not confirmed by AWS: " + error.message);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML =
+      'Place Order · <span id="checkoutButtonTotal">' +
+      money(getGrandTotal()) + '</span>';
+  }
+}
+document.getElementById("checkoutForm").addEventListener("submit", createOrder);
+
+function copyOrderId(id) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(id)
+      .then(() => showToast("Order ID copied!"))
+      .catch(() => showToast("Your order ID is " + id));
+  } else {
+    showToast("Your order ID is " + id);
+  }
+}
+
+
+async function trackOrder() {
+  const id = document.getElementById("trackOrderId").value.trim().toUpperCase();
+  const result = document.getElementById("trackingResult");
+
+  if (!id) {
+    showToast("Enter an order ID first.");
+    return;
+  }
+
+  result.innerHTML = `
+    <div class="empty">
+      <div>⏳</div>
+      <strong>Fetching your order...</strong>
+      <p>Please wait.</p>
+    </div>`;
+
+  try {
+    const response = await fetch(
+      `https://t3jo82h2kh.execute-api.us-west-2.amazonaws.com/prod/orders/${encodeURIComponent(id)}`
+    );
+
+    const order = await response.json();
+
+    if (!response.ok) {
+      result.innerHTML = `
+        <div class="empty">
+          <div>🔎</div>
+          <strong>We couldn't find that order.</strong>
+          <p>Please check your order ID and try again.</p>
+        </div>`;
+      return;
+    }
+
+    currentTrackingId = order.orderId;
+
+    // Preserve the website's existing local order history.
+    const orders = getOrders();
+    const existingIndex = orders.findIndex(
+      item => item.orderId?.toUpperCase() === id
+    );
+
+    if (existingIndex >= 0) {
+      orders[existingIndex] = { ...orders[existingIndex], ...order };
+    } else {
+      orders.push(order);
+    }
+    saveOrders(orders);
+    renderTracking(order, result);
+    startAutomaticOrderProgress(order);
+
+  } catch (error) {
+    console.error("Order tracking error:", error);
+
+    result.innerHTML = `
+      <div class="empty">
+        <div>⚠️</div>
+        <strong>Unable to fetch your order.</strong>
+        <p>Please check your internet connection and try again.</p>
+      </div>`;
+  }
+}
+
+function renderTracking(order, target) {
+  const status = order.status || "RECEIVED";
+  const isTerminal = ["FAILED", "CANCELLED"].includes(status);
+  const displayStatus = status === "RECEIVED" ? "PLACED" : status;
+  const currentIndex = STEPS.findIndex(step => step.status === displayStatus);
+
+  let progressHTML = "";
+
+  if (isTerminal) {
+    progressHTML = `
+      <div class="notice" style="background:${status === "FAILED" ? "#fef2f2" : "#f8fafc"};color:${status === "FAILED" ? "#991b1b" : "#475569"}">
+        <strong>${escapeHTML(STATUS_LABELS[status] || status)}</strong><br>
+        ${status === "FAILED"
+          ? "The order encountered a processing problem. Please contact the restaurant or check back after an administrator reviews it."
+          : "This order has been cancelled."}
+      </div>`;
+  } else {
+    progressHTML = `
+      <div class="progress-track">
+        ${STEPS.map((step, index) => {
+          const done = currentIndex >= 0 && index < currentIndex;
+          const current = index === currentIndex;
+          return `
+            <div class="progress-step ${done ? "done" : ""} ${current ? "current" : ""}">
+              <div class="progress-icon">${done ? "✓" : step.icon}</div>
+              <div class="progress-label">${escapeHTML(step.label)}</div>
+            </div>`;
+        }).join("")}
+      </div>`;
+  }
+
+  const items = Array.isArray(order.items) ? order.items : [];
+
+  const itemLines = items.map(item => {
+    const lineTotal = Number(item.lineTotal ?? (Number(item.price || 0) * Number(item.quantity || 1)));
+
+    return `
+      <div class="total-line">
+        <span>${escapeHTML(item.name || "Item")} × ${Number(item.quantity || 1)}</span>
+        <strong>${money(lineTotal)}</strong>
+      </div>`;
+  }).join("");
+
+  const canCancel = ["PLACED", "RECEIVED", "CONFIRMED"].includes(status);
+  const deliveryFee = Number(order.deliveryFee || 0);
+  const total = Number(order.total || 0);
+  const address = order.customer?.address || order.customerAddress || "";
+  const paymentMethod = order.paymentMethod || "Not specified";
+  const paymentStatus = order.paymentStatus || "Not available";
+
+  target.innerHTML = `
+    <div class="tracking-header">
+      <div>
+        <span class="eyebrow">Your order</span>
+        <h2 style="margin:8px 0">${escapeHTML(order.orderId || "")}</h2>
+        <div class="order-meta">Placed ${escapeHTML(formatDate(order.createdAt))}</div>
+      </div>
+      <span class="status-pill ${getStatusClass(status)}">${escapeHTML(STATUS_LABELS[status] || (status === "RECEIVED" ? "Order Received" : status))}</span>
+    </div>
+
+    ${progressHTML}
+
+    <div class="card" style="box-shadow:none;background:#f8fafc">
+      <h3>🍽️ Order details</h3>
+      ${itemLines}
+      <div class="total-line"><span>Delivery fee</span><strong>${money(deliveryFee)}</strong></div>
+      <div class="total-line grand"><span>Total</span><span>${money(total)}</span></div>
+      <p class="order-meta"><strong>Payment:</strong> ${escapeHTML(paymentMethod)} · ${escapeHTML(paymentStatus)}</p>
+      <p class="order-meta"><strong>Delivering to:</strong> ${escapeHTML(address || "Address not available")}</p>
+      <p class="order-meta"><strong>Customer:</strong> ${escapeHTML(order.customerName || order.customer?.name || "Not available")}</p>
+    </div>
+
+    <p class="order-meta">Last updated: ${escapeHTML(formatDate(order.updatedAt || order.createdAt))}</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="secondary" onclick="showPanel('orders')">View My Orders</button>
+      ${canCancel ? `<button class="danger" onclick="cancelOrder('${escapeHTML(order.orderId || "")}')">Cancel Order</button>` : ""}
+      ${status === "DELIVERED" && !order.rating ? `<button class="primary" onclick="openRating('${escapeHTML(order.orderId || "")}')">⭐ Rate Order</button>` : ""}
+      ${status === "DELIVERED" && order.rating ? `<span class="status-pill green">Rated ${order.rating}/5 ⭐</span>` : ""}
+    </div>`;
+}
+
+const ORDER_STATUS_SEQUENCE = [
+"RECEIVED",
+"CONFIRMED",
+"PREPARING",
+"READY",
+"OUT_FOR_DELIVERY",
+"DELIVERED"
+];
+
+const ORDER_STATUS_DELAY = 3000;
+const orderProgressTimers = {};
+
+async function advanceOrderStatus(orderId, nextStatus) {
+const response = await fetch(
+`https://t3jo82h2kh.execute-api.us-west-2.amazonaws.com/prod/orders/${encodeURIComponent(orderId)}`,
+{
+method: "PUT",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({ status: nextStatus })
+}
+);
+
+const result = await response.json();
+
+if (!response.ok) {
+throw new Error(result.message || "Unable to update order status.");
+}
+
+return result.order;
+}
+
+function startAutomaticOrderProgress(order) {
+const orderId = order.orderId;
+
+if (!orderId || orderProgressTimers[orderId]) {
+return;
+}
+
+// Start only when the order is newly received.
+if (order.status !== "RECEIVED") {
+return;
+}
+
+let currentIndex = 0;
+
+orderProgressTimers[orderId] = setInterval(async () => {
+try {
+currentIndex++;
+
+
+  const nextStatus = ORDER_STATUS_SEQUENCE[currentIndex];
+
+  if (!nextStatus) {
+    clearInterval(orderProgressTimers[orderId]);
+    delete orderProgressTimers[orderId];
+    return;
+  }
+
+  const updatedOrder = await advanceOrderStatus(orderId, nextStatus);
+
+  // Save the latest status in local order history.
+  const orders = getOrders();
+  const index = orders.findIndex(
+    item => item.orderId === orderId
+  );
+
+  if (index >= 0) {
+    orders[index] = { ...orders[index], ...updatedOrder };
+  } else {
+    orders.push(updatedOrder);
+  }
+
+  saveOrders(orders);
+
+  // Refresh the tracking display if this order is open.
+  if (currentTrackingId === orderId) {
+    const target = document.getElementById("trackingResult");
+
+    if (target) {
+      renderTracking(updatedOrder, target);
+    }
+  }
+
+  // Stop after delivery.
+  if (nextStatus === "DELIVERED") {
+    clearInterval(orderProgressTimers[orderId]);
+    delete orderProgressTimers[orderId];
+  }
+} catch (error) {
+  console.error("Automatic status update failed:", error);
+  clearInterval(orderProgressTimers[orderId]);
+  delete orderProgressTimers[orderId];
+}
+
+
+}, 
+ORDER_STATUS_DELAY);
+}
+
+
+async function cancelOrder(orderId) {
+  const orders = getOrders();
+  const order = orders.find(
+    item => item.orderId?.toUpperCase() === orderId.toUpperCase()
+  );
+
+  if (!order || !["PLACED", "RECEIVED", "CONFIRMED"].includes(order.status)) {
+    showToast("This order can no longer be cancelled.");
+    return;
+  }
+
+  if (!confirm("Are you sure you want to cancel this order?")) return;
+
+  const success = await updateOrderStatus(orderId, "CANCELLED");
+
+  if (!success) return;
+
+  const updated = getOrders().find(
+    item => item.orderId?.toUpperCase() === orderId.toUpperCase()
+  );
+
+  const trackSection = document.getElementById("track");
+
+  if (updated && trackSection?.classList.contains("active")) {
+    renderTracking(updated, document.getElementById("trackingResult"));
+  }
+
+  renderOrders();
+  showToast("Order cancelled successfully.");
+}
+
+
+
+
+async function updateOrderStatus(orderId, newStatus) {
+  const orders = getOrders();
+  const order = orders.find(
+    item => item.orderId?.toUpperCase() === orderId.toUpperCase()
+  );
+
+  try {
+    const response = await fetch(
+      `https://t3jo82h2kh.execute-api.us-west-2.amazonaws.com/prod/orders/${encodeURIComponent(orderId.trim())}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          status: newStatus
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("AWS status update failed:", data);
+      showToast(data.message || "Unable to update order status.");
+      return false;
+    }
+
+    const updatedOrder = data.order;
+    const updatedAt = updatedOrder.updatedAt || new Date().toISOString();
+
+    // Update the local order if it exists.
+    if (order) {
+      order.status = updatedOrder.status;
+      order.updatedAt = updatedAt;
+
+      if (!Array.isArray(order.statusHistory)) {
+        order.statusHistory = [];
+      }
+
+      order.statusHistory.push({
+        status: updatedOrder.status,
+        at: updatedAt
+      });
+
+      if (updatedOrder.status === "FAILED") {
+        order.attempts = Number(order.attempts || 0) + 1;
+      }
+
+      if (updatedOrder.status === "DELIVERED") {
+        order.deliveredAt = updatedAt;
+      }
+
+      saveOrders(orders);
+    }
+
+    showToast("Order status updated successfully!");
+    return true;
+
+  } catch (error) {
+    console.error("AWS status update error:", error);
+    showToast("Unable to connect to AWS. Please try again.");
+    return false;
+  }
+}
+
+
+async function adminUpdateStatus(orderId) {
+  const select = document.getElementById("status-" + orderId);
+  if (!select) return;
+
+  const newStatus = select.value;
+
+  const order = getOrders().find(
+    item => item.orderId?.toUpperCase() === orderId.toUpperCase()
+  );
+
+  if (!order) {
+    showToast("Order not found in the local order list.");
+    return;
+  }
+
+  if (["CANCELLED", "DELIVERED"].includes(order.status)) {
+    showToast("Completed or cancelled orders cannot be changed.");
+    renderAdmin();
+    return;
+  }
+
+  if (order.status === "FAILED" && newStatus !== "FAILED") {
+    showToast("Use Retry Order to recover a failed order first.");
+    renderAdmin();
+    return;
+  }
+
+  if (
+    newStatus === "CANCELLED" &&
+    !["PLACED", "RECEIVED", "CONFIRMED"].includes(order.status)
+  ) {
+    showToast("Cancellation is only available before preparation.");
+    renderAdmin();
+    return;
+  }
+
+  if (newStatus === "FAILED") {
+    showToast("Use Simulate Failure to test the failure workflow.");
+    renderAdmin();
+    return;
+  }
+
+  if (newStatus === "PLACED") {
+    showToast("An order cannot be moved backwards to Order Placed.");
+    renderAdmin();
+    return;
+  }
+
+  if (newStatus === order.status) {
+    showToast("The order already has this status.");
+    return;
+  }
+
+  select.disabled = true;
+
+  try {
+    const success = await updateOrderStatus(orderId, newStatus);
+
+    if (!success) {
+      renderAdmin();
+      return;
+    }
+
+    renderAdmin();
+    renderOrders();
+
+    if (
+      currentTrackingId === orderId &&
+      document.getElementById("track")?.classList.contains("active")
+    ) {
+      const updatedOrder = getOrders().find(
+        item => item.orderId?.toUpperCase() === orderId.toUpperCase()
+      );
+
+      if (updatedOrder) {
+        renderTracking(
+          updatedOrder,
+          document.getElementById("trackingResult")
+        );
+      }
+    }
+
+    showToast("Order status updated in AWS successfully!");
+
+  } catch (error) {
+    console.error("Admin status update error:", error);
+    showToast("Unable to update order status.");
+    renderAdmin();
+  }
+}
+
+
+
+function renderOrders() {
+  const orders = getOrders();
+  const history = document.getElementById("orderHistory");
+
+  if (!orders.length) {
+    history.innerHTML = `
+      <div class="card empty">
+        <div>🍽️</div>
+        <strong>No orders yet</strong>
+        <p>Your delicious journey begins with your first order.</p>
+        <button class="primary" onclick="showPanel('menu')">Explore Menu</button>
+      </div>`;
+    return;
+  }
+
+  history.innerHTML = orders.map(order => `
+    <div class="card order-card">
+      <div class="order-card-top">
+        <div>
+          <strong>${escapeHTML(order.orderId)}</strong>
+          <div class="order-meta">${escapeHTML(formatDate(order.createdAt))}</div>
+        </div>
+        <span class="status-pill ${getStatusClass(order.status)}">${escapeHTML(STATUS_LABELS[order.status] || order.status)}</span>
+      </div>
+      <div>${order.items.map(item => `${escapeHTML(item.name)} × ${item.quantity}`).join(", ")}</div>
+      <div class="order-meta" style="margin-top:8px">
+        Payment: ${escapeHTML(order.paymentMethod)} · ${escapeHTML(order.paymentStatus)}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px;flex-wrap:wrap">
+        <strong class="price">${money(order.total)}</strong>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          ${!["DELIVERED", "CANCELLED", "FAILED"].includes(order.status)
+            ? `<button class="primary" onclick="openTracking('${order.orderId}')">Track Order</button>`
+            : ""}
+          ${order.status === "DELIVERED" && !order.rating
+            ? `<button class="primary" onclick="openRating('${order.orderId}')">⭐ Rate Order</button>`
+            : ""}
+          ${order.status === "DELIVERED" && order.rating
+            ? `<span class="status-pill green">Your rating: ${order.rating}/5 ⭐</span>`
+            : ""}
+          ${order.status === "FAILED"
+            ? `<button class="secondary" onclick="showPanel('admin')">View in Admin</button>`
+            : ""}
+          <button class="secondary" onclick="reorder('${order.orderId}')">Reorder</button>
+        </div>
+      </div>
+      ${order.feedback ? `<p class="notice" style="margin-top:15px">Your feedback: ${escapeHTML(order.feedback)}</p>` : ""}
+    </div>
+  `).join("");
+}
+
+function openTracking(orderId) {
+  document.getElementById("trackOrderId").value = orderId;
+  showPanel("track");
+  trackOrder();
+}
+
+function reorder(orderId) {
+  const order = getOrders().find(item => item.orderId === orderId);
+  if (!order) return;
+
+  const cart = getCart();
+
+  order.items.forEach(item => {
+    if (FOOD.some(food => food.id === item.id)) {
+      cart[item.id] = Math.min(99, Number(cart[item.id] || 0) + item.quantity);
+    }
+  });
+
+  saveCart(cart);
+  updateCartCount();
+  showPanel("checkout");
+  showToast("Items added to your cart.");
+}
+
+function openRating(orderId) {
+  const order = getOrders().find(item => item.orderId === orderId);
+
+  if (!order || order.status !== "DELIVERED") {
+    showToast("You can rate an order after delivery.");
+    return;
+  }
+
+  if (order.rating) {
+    showToast("You have already rated this order.");
+    return;
+  }
+
+  currentTrackingId = orderId;
+  selectedRating = 0;
+
+  // Open the Track Order panel so the rating form is visible.
+  showPanel("track");
+
+  document.getElementById("trackOrderId").value = orderId;
+
+  document.getElementById("trackingResult").innerHTML = `
+    <div class="card" style="box-shadow:none">
+      <h2>How was your QuickBite experience?</h2>
+      <p class="order-meta">Order ${escapeHTML(order.orderId)}</p>
+      <p>Tap a star to rate your experience.</p>
+
+      <div class="rating-stars" id="ratingStars">
+        ${[1, 2, 3, 4, 5].map(n => `
+          <button type="button" class="star"
+            aria-label="Rate ${n} stars"
+            onclick="selectRating(${n})">★</button>
+        `).join("")}
+      </div>
+
+      <div class="field">
+        <label for="ratingFeedback">Tell us more (optional)</label>
+        <textarea id="ratingFeedback" maxlength="500"
+          placeholder="Food quality, delivery experience..."></textarea>
+      </div>
+
+      <button type="button" class="primary"
+        style="margin-top:15px"
+        onclick="submitRating()">Submit Rating</button>
+    </div>`;
+}
+
+
+
+function selectRating(rating) {
+  selectedRating = rating;
+  document.querySelectorAll("#ratingStars .star").forEach((star, index) => {
+    star.classList.toggle("selected", index < rating);
+  });
+}
+
+function submitRating() {
+  if (!selectedRating) {
+    showToast("Please select a star rating.");
+    return;
+  }
+
+  const orders = getOrders();
+  const order = orders.find(item => item.orderId === currentTrackingId);
+
+  if (!order || order.status !== "DELIVERED" || order.rating) {
+    showToast("This order is not eligible for a new rating.");
+    return;
+  }
+
+  order.rating = selectedRating;
+  order.feedback = document.getElementById("ratingFeedback").value.trim();
+  order.ratedAt = new Date().toISOString();
+  order.updatedAt = order.ratedAt;
+
+  saveOrders(orders);
+  renderTracking(order, document.getElementById("trackingResult"));
+  showToast("Thank you for your feedback! ⭐");
+}
+
+function renderAdmin() {
+  const orders = getOrders();
+
+  const count = status => orders.filter(order => order.status === status).length;
+
+  document.getElementById("adminStats").innerHTML = `
+    <div class="stat"><span>Total orders</span><strong>${orders.length}</strong></div>
+    <div class="stat"><span>In progress</span><strong>${orders.filter(order => !["DELIVERED", "FAILED", "CANCELLED"].includes(order.status)).length}</strong></div>
+    <div class="stat"><span>Delivered</span><strong>${count("DELIVERED")}</strong></div>
+    <div class="stat"><span>Failed</span><strong>${count("FAILED")}</strong></div>`;
+
+  const adminOrders = document.getElementById("adminOrders");
+
+  if (!orders.length) {
+    adminOrders.innerHTML = `
+      <div class="empty">
+        <div>📋</div>
+        <strong>No orders to manage</strong>
+        <p>Place a demo order from the menu to see it here.</p>
+      </div>`;
+  } else {
+    adminOrders.innerHTML = orders.map(order => {
+      const allowed = ["RECEIVED", "CONFIRMED", "PREPARING", "READY", "OUT_FOR_DELIVERY", "DELIVERED", "FAILED", "CANCELLED"];
+
+      return `
+        <div class="admin-order">
+          <div class="admin-order-head">
+            <div>
+              <strong>${escapeHTML(order.orderId)}</strong>
+              <div class="order-meta">${escapeHTML(order.customer?.name || order.customerName || "Customer")} · ${escapeHTML(order.customer?.phone || order.customerPhone || "Phone unavailable")}</div>
+              <div class="order-meta">${escapeHTML(order.items.map(item => `${item.name} × ${item.quantity}`).join(", "))}</div>
+              <div class="order-meta">Payment: ${escapeHTML(order.paymentMethod)} · ${escapeHTML(order.paymentStatus)}</div>
+              <div class="order-meta">Attempts recorded: ${Number(order.attempts || 0)}</div>
+            </div>
+            <div>
+              <strong>${money(order.total)}</strong><br>
+              <span class="status-pill ${getStatusClass(order.status)}">${escapeHTML(STATUS_LABELS[order.status] || order.status)}</span>
+            </div>
+          </div>
+
+          <div class="admin-controls">
+            <select id="status-${order.orderId}" aria-label="Update order status">
+              ${allowed.map(status => `
+                <option value="${status}" ${status === order.status ? "selected" : ""}>
+                  ${escapeHTML(STATUS_LABELS[status])}
+                </option>
+              `).join("")}
+            </select>
+            <button class="primary" onclick="adminUpdateStatus('${order.orderId}')">Update Status</button>
+            ${order.status === "FAILED" ? `<button class="success-btn" onclick="retryFailedOrder('${order.orderId}')">↻ Retry Order</button>` : ""}
+            ${order.status === "PLACED" ? `<button class="danger" onclick="simulateFailure('${order.orderId}')">⚠ Simulate Failure</button>` : ""}
+            <button class="secondary" onclick="openTracking('${order.orderId}')">View Tracking</button>
+          </div>
+        </div>`;
+    }).join("");
+  }
+
+  const ratedOrders = orders.filter(order => order.rating);
+
+  document.getElementById("adminRatings").innerHTML = ratedOrders.length
+    ? ratedOrders.map(order => `
+      <div class="cart-line">
+        <div>
+          <strong>${escapeHTML(order.orderId)}</strong>
+          <div class="order-meta">${escapeHTML(order.customer?.name || order.customerName || "Customer")}</div>
+          ${order.feedback ? `<div style="margin-top:6px">${escapeHTML(order.feedback)}</div>` : ""}
+        </div>
+        <strong>${"⭐".repeat(order.rating)} (${order.rating}/5)</strong>
+      </div>
+    `).join("")
+    : `<p class="order-meta">No customer ratings yet. Deliver a demo order and submit a rating.</p>`;
+}
+
+
+function simulateFailure(orderId) {
+  const order = getOrders().find(item => item.orderId === orderId);
+  if (!order || order.status !== "PLACED") {
+    showToast("Only newly placed orders can use this demo action.");
+    return;
+  }
+
+  if (!confirm("Simulate an order-processing failure? This is only browser demo data.")) return;
+
+  updateOrderStatus(orderId, "FAILED");
+  renderAdmin();
+  renderOrders();
+  showToast("Demo failure recorded. Try the recovery action.");
+}
+
+function retryFailedOrder(orderId) {
+  const orders = getOrders();
+  const order = orders.find(item => item.orderId === orderId);
+
+  if (!order || order.status !== "FAILED") {
+    showToast("Only failed orders can be retried.");
+    return;
+  }
+
+  order.attempts = Number(order.attempts || 0) + 1;
+  order.status = "CONFIRMED";
+  order.updatedAt = new Date().toISOString();
+
+  if (!Array.isArray(order.statusHistory)) order.statusHistory = [];
+  order.statusHistory.push({ status: "CONFIRMED", at: order.updatedAt });
+
+  saveOrders(orders);
+  renderAdmin();
+  renderOrders();
+  showToast("Demo recovery complete. Order confirmed.");
+}
+
+function initialize() {
+  renderCategories();
+  renderFood();
+  renderCart();
+  renderOrders();
+  renderAdmin();
+}
+
+initialize();
+</script>
+
+</body>
+</html>
